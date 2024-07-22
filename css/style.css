@@ -70,6 +70,9 @@ h6 {
   font-weight: inherit;
   font-size: inherit
 }
+body {
+  background: #f7f7f7
+}
 .lock body {
   overflow: hidden;
   touch-action: none;
@@ -202,7 +205,18 @@ body {
   -webkit-transform: scale(1);
   transform: scale(1)
 }
+.mobile-padding {
+  position: fixed;
+  width: 100%;
+  z-index: 200;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 52px;
+  padding: 10px 15px
+}
 .header {
+  margin-top: 52px;
   width: 100%
 }
 .header__container {
@@ -308,7 +322,7 @@ body {
 }
 .main {
   position: relative;
-  min-height: 100vh;
+  min-height: calc(100vh - 50px);
   margin-top: -120px;
   background: #f7f7f7
 }
@@ -321,7 +335,7 @@ body {
 .main__content {
   position: relative;
   z-index: 2;
-  min-height: 100vh;
+  min-height: calc(100vh - 50px);
   display: flex;
   flex-direction: column;
   justify-content: flex-end
@@ -550,7 +564,7 @@ body {
 .how__items::before {
   content: "";
   position: absolute;
-  background: url(../img/line.webp) 0 0/100% no-repeat;
+  background: url(../img/line.png) 0 0/100% no-repeat;
   top: 68px;
   left: calc(15% + 60px);
   display: block;
@@ -558,7 +572,7 @@ body {
   width: calc(70% - 120px)
 }
 .join__content {
-  background: url(../img/background-join-pc.webp) 0 0/100% 100% no-repeat;
+  background: url(../img/background-join-pc.png) 0 0/100% 100% no-repeat;
   background-color: #00528c;
   position: relative;
   padding-top: 90px;
@@ -643,6 +657,141 @@ body {
 }
 .about__text p:not(:last-child) {
   margin-bottom: 12px
+}
+#slider-container {
+  width: 80%;
+  margin: 50px auto;
+  text-align: center
+}
+#slider-value {
+  font-size: 24px;
+  margin-bottom: 20px;
+  width: 90%;
+  text-align: left;
+  padding-right: 5px
+}
+#slider {
+  margin: 0 auto
+}
+.value-box {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 20px
+}
+#slider-round {
+  height: 10px
+}
+#slider-round .noUi-connect {
+  background: #c0392b
+}
+#slider-round .noUi-handle {
+  height: 18px;
+  width: 18px;
+  top: -5px;
+  right: -9px;
+  border-radius: 9px
+}
+.chp_calculator-section {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,.1);
+  padding: 18px;
+  max-width: 1200px;
+  margin: 40px auto;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #e2e2e2;
+  margin-top: 0
+}
+.chp_calculator {
+  display: flex;
+  width: 100%;
+  justify-content: space-between
+}
+.chp_calculator_left,
+.chp_calculator_right {
+  padding: 18px
+}
+.chp_calculator_left {
+  width: 50%
+}
+.chp_calculator_right {
+  width: 50%;
+  background-color: #f9f9f9;
+  border-radius: 8px
+}
+.chp_calculator-heading {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 10px
+}
+.chp_calculator-subheading {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center
+}
+.chp_calculator-description {
+  font-size: 16px;
+  margin-bottom: 20px
+}
+.chp_calculator-form {
+  margin-bottom: 20px;
+  text-align: center
+}
+.chp_calculator-label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 8px
+}
+.chp_calculator-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 40px;
+  text-align: center;
+  color: #01528a
+}
+.chp_calculator-slider {
+  width: 100%;
+  height: 6px;
+  background-color: #ddd;
+  border-radius: 3px;
+  position: relative
+}
+.chp_calculator-adjust {
+  font-size: 12px;
+  text-align: center
+}
+.chp_calculator-results {
+  text-align: center
+}
+.chp_calculator-result {
+  margin-bottom: 20px
+}
+.chp_calculator-result-value {
+  font-size: 36px;
+  font-weight: 700;
+  color: #01528a;
+  display: block;
+  margin-bottom: 5px
+}
+.chp_calculator-result-label {
+  font-size: 14px;
+  color: #888
+}
+#slider-round .noUi-connect {
+  background: #7fa923
+}
+.noUi-handle {
+  background: #f27d01!important;
+  border: none!important;
+  box-shadow: none!important
+}
+.noUi-handle::after,
+.noUi-handle::before {
+  display: none!important
 }
 @media (min-width:84.375em) {
   .button-blue {
@@ -871,6 +1020,11 @@ body {
     margin: 0
   }
 }
+@media (max-width:600px) {
+  .mobile-padding {
+    font-size: 22px!important
+  }
+}
 @media (max-width:20em) {
   .button-blue {
     width: 9.375rem
@@ -1018,16 +1172,13 @@ body {
   }
 }
 @media (max-width:84.375em) {
-  .header__container {
-    height: 100px
-  }
   .main {
     margin-top: -100px
   }
 }
 @media (max-width:61.99875em) {
   .header__container {
-    height: 90px
+    height: 100px
   }
   .footer__container {
     gap: 25px
@@ -1118,7 +1269,7 @@ body {
     transform: rotate(45deg)
   }
   .header__container {
-    height: 70px
+    height: 80px
   }
   .menu-header__body {
     position: absolute;
@@ -1185,7 +1336,7 @@ body {
   .join__content {
     padding-top: 65px;
     border-radius: 30px;
-    background: url(../img/background-join-pc.webp) center center/auto 100% no-repeat;
+    background: url(../img/background-join-pc.png) center center/auto 100% no-repeat;
     background-color: #00528c
   }
   .join__content::before {
@@ -1233,8 +1384,12 @@ body {
   .button-white {
     white-space: initial
   }
+  .mobile-padding {
+    font-size: 18px!important;
+    height: 62px
+  }
   .header__container {
-    height: 60px
+    height: 100px
   }
   .footer__container {
     padding-top: 40px
@@ -1254,7 +1409,11 @@ body {
     text-align: center
   }
   .main {
-    margin-top: -60px
+    margin-top: -60px;
+    min-height: calc(100vh - 60px)
+  }
+  .main__content {
+    min-height: calc(100vh - 60px)
   }
   .main .welcome {
     font-size: 15px
@@ -1757,5 +1916,14 @@ body {
   }
   .footer__icon:hover {
     box-shadow: 0 4px 8px rgba(0,0,0,.2),0 6px 20px rgba(0,0,0,.19)
+  }
+}
+@media only screen and (max-device-width:480px) {
+  .chp_calculator {
+    display: block
+  }
+  .chp_calculator_left,
+  .chp_calculator_right {
+    width: 100%
   }
 }

@@ -6,14 +6,17 @@
 	<meta charset="UTF-8">
 	<meta name="format-detection" content="telephone=no">
 	<!-- <style>body{opacity: 0;}</style> -->
-	<link rel="stylesheet" href="css/style.min.css?_v=20240608170515">
-	<link rel="shortcut icon" href="favicon.ico">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.7.0/nouislider.min.js?_v=20240722171505"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap&_v=20240722171505" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.min.css?_v=20240722171505">
+	<link rel="shortcut icon" href="img/favicon.jpg">
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
 	<div class="wrapper">
+		<h1 class="mobile-padding" style="font-size: 24px; background-color: #02518C; color: white; font-family: Montserrat, 'Source Sans Pro', sans-serif; padding: 10px; text-align: center;">Join Our Clinic for Free and Save 20%</h1>
 		<header class="header">
 			<div class="header__container">
 				<a href="" class="header__logo"><img src="img/logo.svg" alt="logo"></a>
@@ -47,15 +50,19 @@
 
 			<!-- SECTION main -->
 			<section class="main">
+
 				<div class="main__container">
+
 					<div class="main__content">
-						<img src="img/background-first-mob.webp" class="background-mob" alt="bg">
+
+						<img src="img/background-first-mob.png" class="background-mob" alt="bg">
 						<div class="spacer"></div>
+
 						<div class="welcome">
 							Welcome to VitaminScript
 						</div>
 						<div class="main__title">
-							<h1>Your Path to Personalized Health and Wellness</h1>
+							<h2>Your Path to Personalized Health and Wellness</h2>
 						</div>
 						<a href="" class="button-blue">
 							Your Free Consultation
@@ -65,7 +72,7 @@
 							<span>Scroll down</span>
 						</a>
 					</div>
-					<img src="img/background-first-pc.webp" class="background" alt="bg">
+					<img src="img/background-first-pc.png" class="background" alt="bg">
 
 				</div>
 			</section>
@@ -122,7 +129,7 @@
 
 						<div class="why__item">
 							<div data-watch-threshold="0.3" data-watch-once data-watch class="why__image">
-								<img src="img/photo-1.webp" alt="image">
+								<img src="img/photo-1.png" alt="image">
 							</div>
 							<div class="why__subtitle">
 								<div class="why__icon">
@@ -142,7 +149,7 @@
 
 						<div class="why__item">
 							<div data-watch-threshold="0.3" data-watch-once data-watch class="why__image">
-								<img src="img/photo-2.webp" alt="image">
+								<img src="img/photo-2.png" alt="image">
 							</div>
 							<div class="why__subtitle">
 								<div class="why__icon">
@@ -162,7 +169,7 @@
 
 						<div class="why__item">
 							<div data-watch-threshold="0.3" data-watch-once data-watch class="why__image">
-								<img src="img/photo-3.webp" alt="image">
+								<img src="img/photo-3.png" alt="image">
 							</div>
 							<div class="why__subtitle">
 								<div class="why__icon">
@@ -182,7 +189,7 @@
 
 						<div class="why__item">
 							<div data-watch-threshold="0.3" data-watch-once data-watch class="why__image">
-								<img src="img/photo-4.webp" alt="image">
+								<img src="img/photo-4.png" alt="image">
 							</div>
 							<div class="why__subtitle">
 								<div class="why__icon">
@@ -207,13 +214,126 @@
 
 
 
+			<!-- SECTION CALCULATOR -->
+			<section class="calculator">
+				<div class="calculator__container">
+
+					<script>
+						document.addEventListener('DOMContentLoaded', function() {
+							// Initialize the slider
+							var slider = document.getElementById('slider-round');
+							var sliderValueInput = document.getElementById('slider-value');
+
+							noUiSlider.create(slider, {
+								start: 0,
+								connect: [true, false],
+								range: {
+									'min': 0,
+									'max': 1000
+								},
+								step: 1,
+								format: {
+									to: function(value) {
+										return Math.round(value);
+									},
+									from: function(value) {
+										return Math.round(value);
+									}
+								}
+							});
+
+							// Function to format number as USD currency
+							function formatCurrency(value) {
+								return '$' + value.toFixed(2);
+							}
+
+							// Get the elements to update
+							var value1 = document.getElementById('value1');
+							var value2 = document.getElementById('value2');
+
+							// Update the values as the slider moves
+							slider.noUiSlider.on('update', function(values, handle) {
+								var sliderValue = spendAmount = values[handle];
+								sliderValueInput.value = formatCurrency(sliderValue);
+
+								let savingsPercentage;
+								if (spendAmount >= 0 && spendAmount <= 149) {
+									savingsPercentage = 0.18;
+								} else if (spendAmount >= 150 && spendAmount <= 299) {
+									savingsPercentage = 0.21;
+								} else if (spendAmount >= 300) {
+									savingsPercentage = 0.26;
+								}
+
+								let savingsAmount = spendAmount * savingsPercentage;
+								let totalAmountAfterSavings = spendAmount - savingsAmount;
+
+								value1.innerText = formatCurrency(savingsAmount);
+								value2.innerText = formatCurrency(totalAmountAfterSavings);
+
+							});
+
+							// Update the slider value when the input field changes
+							sliderValueInput.addEventListener('change', function() {
+								var inputValue = parseFloat(sliderValueInput.value.replace(/[^0-9.-]+/g, ''));
+								if (isNaN(inputValue) || inputValue < 0) {
+									inputValue = 0;
+								} else if (inputValue > 1000) {
+									inputValue = 1000;
+								}
+								slider.noUiSlider.set(Math.round(inputValue));
+							});
+
+							// Ensure input field value is always in USD currency format
+							sliderValueInput.addEventListener('blur', function() {
+								var inputValue = parseFloat(sliderValueInput.value.replace(/[^0-9.-]+/g, ''));
+								if (isNaN(inputValue) || inputValue < 0) {
+									inputValue = 0;
+								} else if (inputValue > 1000) {
+									inputValue = 1000;
+								}
+								sliderValueInput.value = formatCurrency(Math.round(inputValue));
+							});
+						});
+					</script>
+					<div class="chp_calculator-section">
+						<div class="chp_calculator">
+							<div class="chp_calculator_left">
+								<h3 class="chp_calculator-heading">Vitamin Savings Calculator</h3>
+								<p class="chp_calculator-description">How much do you spent on vitamins monthly?</p>
+								<div class="chp_calculator-form">
+									<input class="chp_calculator-input" id="slider-value" type="text" value="$0.00">
+									<div class="noUi-ltr chp_calculator-slider" id="slider-round"></div>
+								</div>
+								<p class="chp_calculator-adjust">Adjust Slider to Select Monthly Spending Amount</p>
+							</div>
+							<div class="chp_calculator_right">
+								<h4 class="chp_calculator-subheading">Savings</h4>
+								<div class="chp_calculator-results">
+									<div class="chp_calculator-result">
+										<span class="chp_calculator-result-label">Amount Saved</span> <span class="chp_calculator-result-value" id="value1">$1.00</span>
+									</div>
+									<div class="chp_calculator-result">
+										<span class="chp_calculator-result-label">Amount Spent After Savings</span> <span class="chp_calculator-result-value" id="value2">$1.00</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</section>
+			<!-- End of SECTION CALCULATOR -->
+
+
+
 
 			<!-- SECTION why-white -->
 			<section class="why-white">
 				<div class="why-white__container">
 					<div class="why-white__row text-image">
 						<div data-watch-threshold="0.3" data-watch-once data-watch class="why-white__col why-white__col--image">
-							<img class="why-white__image" src="img/free-shipping.webp" alt="image">
+							<img class="why-white__image" src="img/free-shipping.png" alt="image">
 						</div>
 						<div class="why-white__col why-white__col--content">
 							<div data-watch-threshold="0.5" data-watch-once data-watch class="why-white__title">
@@ -221,7 +341,7 @@
 							</div>
 							<div class="why-white__content ">
 								<div class="why-white__block">
-									<img src="img/icon-checked.webp" alt="icon">
+									<img src="img/icon-checked.png" alt="icon">
 									<div class="why-white__content-wrapper">
 										<div class="why-white__subtitle">
 											<h3>Always Free</h3>
@@ -237,7 +357,7 @@
 
 					<div class="why-white__row">
 						<div data-watch-threshold="0.3" data-watch-once data-watch class="why-white__col why-white__col--image">
-							<img class="why-white__image" src="img/diagnostic-testing.webp" alt="image">
+							<img class="why-white__image" src="img/diagnostic-testing.png" alt="image">
 						</div>
 						<div class="why-white__col why-white__col--content">
 							<div data-watch-threshold="0.5" data-watch-once data-watch class="why-white__title">
@@ -245,7 +365,7 @@
 							</div>
 							<div class="why-white__content">
 								<div class="why-white__block">
-									<img src="img/icon-checked.webp" alt="icon">
+									<img src="img/icon-checked.png" alt="icon">
 									<div class="why-white__content-wrapper">
 										<div class="why-white__subtitle">
 											<h3>Understand Your Health</h3>
@@ -256,7 +376,7 @@
 									</div>
 								</div>
 								<div class="why-white__block">
-									<img src="img/icon-checked.webp" alt="icon">
+									<img src="img/icon-checked.png" alt="icon">
 									<div class="why-white__content-wrapper">
 										<div class="why-white__subtitle">
 											<h3>Personalized Wellness Plans</h3>
@@ -353,7 +473,7 @@
 				<div class="about__container">
 					<div class="about__row">
 						<div data-watch-threshold="0.3" data-watch-once data-watch class="about__col about__col--image">
-							<img src="img/about-image.webp" alt="image">
+							<img src="img/about-image.png" alt="image">
 						</div>
 						<div class="about__col about__col--content">
 							<div data-watch-threshold="0.5" data-watch-once data-watch class="about__title">
@@ -427,7 +547,8 @@
 			</div>
 		</footer>
 	</div>
-	<script src="js/app.min.js?_v=20240608170515"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.7.0/nouislider.min.css?_v=20240722171505" rel="stylesheet">
+	<script src="js/app.min.js?_v=20240722171505"></script>
 </body>
 
 </html>

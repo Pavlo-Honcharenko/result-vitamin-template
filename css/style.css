@@ -258,7 +258,7 @@ body {
   gap: 24px;
   position: relative;
   z-index: 15;
-  margin-top: 185px;
+  margin-top: 10vh;
   font-weight: 600
 }
 .header__link {
@@ -320,6 +320,9 @@ body {
 }
 .footer__logo {
   padding-bottom: 10px
+}
+.footer__logo img {
+  max-width: 290px
 }
 .footer__text {
   width: 100%
@@ -1306,8 +1309,12 @@ body {
   .header__container {
     height: 80px
   }
+  .header__social {
+    padding-top: 30px;
+    padding-bottom: 30px
+  }
   .header .button-blue {
-    margin-bottom: 30px
+    margin-bottom: 50px
   }
   .menu-header__body {
     overflow: auto;
@@ -1330,7 +1337,8 @@ body {
     flex-direction: column;
     background: #fff;
     transition: all .4s ease 0s;
-    z-index: 10
+    z-index: 10;
+    padding-top: 100px
   }
   .menu-open .menu-header__body {
     left: 0
@@ -1962,6 +1970,26 @@ body {
   }
   .footer__icon:hover {
     box-shadow: 0 4px 8px rgba(0,0,0,.2),0 6px 20px rgba(0,0,0,.19)
+  }
+}
+@media (max-height:500px) {
+  .header__links {
+    margin-top: 16vh
+  }
+}
+@media (max-height:440px) {
+  .header__links {
+    margin-top: 25vh
+  }
+}
+@media (max-height:420px) {
+  .header__links {
+    margin-top: 38vh
+  }
+}
+@media (max-height:380px) {
+  .header__links {
+    margin-top: 170px
   }
 }
 @media only screen and (max-device-width:480px) {
